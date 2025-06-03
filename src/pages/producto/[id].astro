@@ -1,0 +1,48 @@
+---
+export const prerender = false;
+import Layout from "../../layouts/Layout.astro";
+import CantidadSelector from "../../components/product/CantidadSelector.tsx";
+
+const { id } = Astro.params;
+---
+
+<Layout>
+    <div class="w-full flex items-center flex-col gap-10">
+        <article class="w-full sm:w-3/4 flex gap-8">
+            <section class="flex-1/2 flex flex-col relative aspect-square">
+                <img
+                    src=""
+                    alt=""
+                    class="w-full aspect-square h-full absolute top-0 left-0"
+                />
+            </section>
+            <section class="flex-1/3 flex flex-col gap-2">
+                <h1 class="text-xl">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                    Unde, architecto!
+                </h1>
+                <span>Cant. disponible: 10</span>
+                <CantidadSelector client:load />
+                <h3 class="text-2xl">$9999.99</h3>
+                <button class="border cursor-pointer hover:bg-stone-50 rounded-lg p-2">Comprar ahora</button>
+                <button class="border cursor-pointer hover:bg-stone-50 rounded-lg p-2">Agregar al carrito</button>
+            </section>
+        </article>
+        <article class="w-full sm:w-3/4 flex flex-col">
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui
+                unde nam facere. Perferendis veniam adipisci dolorem aliquam
+                minus sunt vel molestias optio, laudantium totam esse quidem,
+                veritatis soluta quo odio? Dolore, blanditiis? Optio quas
+                officia sed quam, repudiandae quod in similique omnis fuga
+                assumenda hic laboriosam laborum quos odit atque fugit
+                consectetur aliquid ullam pariatur explicabo! Illum, dolores
+                provident eius, sunt aut dolorum nam eum voluptates quas facere
+                eos unde mollitia alias quae hic obcaecati dolore eligendi dicta
+                optio beatae. Aperiam laboriosam repudiandae laudantium sunt eum
+                asperiores minima maiores voluptate commodi, harum voluptates
+                labore amet ullam soluta quas illo pariatur.
+            </p>
+        </article>
+    </div>
+</Layout>
