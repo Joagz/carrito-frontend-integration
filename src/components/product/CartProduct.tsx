@@ -1,24 +1,26 @@
+import type { Product } from "../../interface/Product";
 
 interface Props {
     del: () => void;
     addOne: () => void;
     removeOne: () => void;
+    product: Product
 }
 
 
-export default function CartProduct({ del, addOne, removeOne }: Props) {
+export default function CartProduct({ del, addOne, removeOne, product}: Props) {
     return (<div
+        key={product.id}
         className="w-full flex gap-4 border rounded-sm p-2 justify-center items-center"
     >
         <img
-            src=""
-            alt="icon"
+            src={product.image}
+            alt={"icon"}
             className="w-14 h-14 bg-stone-50 aspect-square object-contain"
         />
         <div className="flex flex-col flex-1">
             <p className="line-clamp-1 font-light">
-                Lorem ipsum, dolor sit amet consectetur adipisicing
-                elit. Ab, nesciunt?
+                {product.name}
             </p>
             <div className="flex gap-10">
                 <button onClick={() => del()} className="cursor-pointer text-blue-900">Eliminar</button>

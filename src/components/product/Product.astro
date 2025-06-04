@@ -1,14 +1,17 @@
 ---
+import type { Product } from '../../interface/Product';
 
+interface Props {
+    product: Product
+}
+
+const { name, price, id, image} = Astro.props.product;
 ---
 
 <section class="sm:max-w-48 max-w-full rounded-sm border col-span-1">
-    <a href="/producto/1" class="w-full flex-col flex p-2">
-        <img class="w-full h-40" src="" alt="product-view" />
-        <span class="font-bold line-clamp-2"
-            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse,
-            fugit.</span
-        >
-        <span class="text-xl">$9999.99</span>
+    <a href=`/producto/${id}` class="w-full flex-col flex p-2">
+        <img class="w-full h-40" src={image} alt={image} />
+        <span class="font-bold line-clamp-2">{name}</span>
+        <span class="text-xl">${price.toLocaleString("es-ES")}</span>
     </a>
 </section>

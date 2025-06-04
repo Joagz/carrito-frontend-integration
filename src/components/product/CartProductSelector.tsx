@@ -9,6 +9,7 @@ export default function CartProductSelector() {
 
     useEffect(() => {
         const saved = localStorage.getItem("products");
+        console.log(saved)
         if (saved !== null) {
             try {
                 const parsed = JSON.parse(saved);
@@ -21,8 +22,13 @@ export default function CartProductSelector() {
         }
     }, []);
 
+    function updateLocalStorage(updatedProducts: Product[]) {
+        setProducts(updatedProducts);
+        localStorage.setItem("products", JSON.stringify(updatedProducts));
+    }
+
     function del(id: number) {
-        setProducts(products.filter(p => p.id != id));
+        updateLocalStorage(products.filter(p => p.id != id));
     }
 
     function addOne(id: number) {
@@ -30,7 +36,7 @@ export default function CartProductSelector() {
         if (index >= 0) {
             const productsCopy = [...products];
             ++productsCopy[index].stock;
-            setProducts(productsCopy);
+            updateLocalStorage(productsCopy);
         }
     }
 
@@ -39,7 +45,10 @@ export default function CartProductSelector() {
         if (index >= 0) {
             const productsCopy = [...products];
             --productsCopy[index].stock;
-            setProducts(productsCopy);
+            updateLocalStorage(productsCopy);
+        } else {
+            // Si stock llega a 0, se elimina
+            del(id);
         }
     }
 
@@ -49,15 +58,16 @@ export default function CartProductSelector() {
         </article>)
 
     return (<article className="flex w-3/4 gap-10">
-        <section className="flex flex-col flex-1/3">
+        <section className="flex flex-col flex-1/3 gap-3">
             {products.map(product => <CartProduct
+                product={product}
                 del={() => del(product.id)}
                 removeOne={() => removeOne(product.id)}
                 addOne={() => addOne(product.id)} />)}
         </section>
-        <section className="flex flex-col-reverse flex-1 gap-5 border rounded-sm p-2">
+        <section className="flex flex-col flex-1 gap-5 border rounded-sm p-2">
             <div className="flex w-full justify-between">
-                <span className="font-bold text-xl">Subtotal:</span><span> ${products.reduce((acc, cur) => acc + cur.price, 0)}</span>
+                <span className="font-bold text-xl">Subtotal:</span><span> ${products.reduce((acc, cur) => acc + cur.price * cur.stock, 0)}</span>
             </div>
             <ul>
                 {
@@ -71,6 +81,7 @@ export default function CartProductSelector() {
                     </li>)
                 }
             </ul>
+            <a className="w-full p-2 border hover:bg-stone-50 rounded-sm text-center" href="/checkout">Proceder al pago</a>
         </section>
     </article>
     )

@@ -26,7 +26,7 @@ export function AddToCartWrapper({ product }: Props) {
     return productExists ? (
         <a
             href="/carrito"
-            className="border cursor-pointer text-center w-full bg-slate-50 hover:bg-stone-50 rounded-lg p-2"
+            className="border cursor-pointer text-center w-full bg-stone-50 hover:bg-stone-50 rounded-lg p-2"
         >
             Ir al carrito
         </a>
