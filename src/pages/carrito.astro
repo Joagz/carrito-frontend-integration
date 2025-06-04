@@ -1,46 +1,10 @@
 ---
+import CartProductSelector from "../components/product/CartProductSelector";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
     <div class="w-full flex flex-col justify-center items-center">
-        <article class="flex w-3/4 gap-10">
-            <section class="flex flex-col flex-1/3">
-                <div
-                    class="w-full flex gap-4 border justify-center items-center"
-                >
-                    <img
-                        src=""
-                        alt="icon"
-                        class="w-14 h-14 bg-stone-50 aspect-square object-contain"
-                    />
-                    <div class="flex flex-col flex-1">
-                        <p class="line-clamp-1">
-                            Lorem ipsum, dolor sit amet consectetur adipisicing
-                            elit. Ab, nesciunt?
-                        </p>
-                        <div class="flex gap-10">
-                            <button>Eliminar</button>
-                            <button>Agregar 1u.</button>
-                            <button>Quitar 1u.</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="flex flex-col flex-1">
-                <h2>Subtotal: $29.999,97</h2>
-                <ul>
-                    <li class="flex justify-between gap-5">
-                        <div class="flex">
-                            <p class="line-clamp-1 overflow-ellipsis">
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Porro, doloribus?
-                            </p><span>(x3)</span>
-                        </div>
-                        <p>29.999,97</p>
-                    </li>
-                </ul>
-            </section>
-        </article>
+        <CartProductSelector client:load />
     </div>
 </Layout>

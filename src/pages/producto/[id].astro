@@ -2,8 +2,16 @@
 export const prerender = false;
 import Layout from "../../layouts/Layout.astro";
 import CantidadSelector from "../../components/product/CantidadSelector.tsx";
+import { AddToCartWrapper } from "../../components/product/AddToCartWrapper";
+import type { Product } from "../../interface/Product";
 
 const { id } = Astro.params;
+const product: Product = {
+    id: 1,
+    name: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod, quaerat?",
+    price: 9999.99,
+    stock: 1,
+};
 ---
 
 <Layout>
@@ -24,8 +32,7 @@ const { id } = Astro.params;
                 <span>Cant. disponible: 10</span>
                 <CantidadSelector client:load />
                 <h3 class="text-2xl">$9999.99</h3>
-                <button class="border cursor-pointer hover:bg-stone-50 rounded-lg p-2">Comprar ahora</button>
-                <button class="border cursor-pointer hover:bg-stone-50 rounded-lg p-2">Agregar al carrito</button>
+                <AddToCartWrapper product={product}/>
             </section>
         </article>
         <article class="w-full sm:w-3/4 flex flex-col">
