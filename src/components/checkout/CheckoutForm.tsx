@@ -1,60 +1,98 @@
-import { initMercadoPago, Payment } from "@mercadopago/sdk-react";
-
-initMercadoPago("YOUR_PUBLIC_KEY");
+import { useForm } from "react-hook-form";
 
 export function CheckoutForm() {
-  const initialization = {
-    amount: 100,
-    preferenceId: "<PREFERENCE_ID>",
-  };
-  const customization = {
-    paymentMethods: {
-      ticket: "all",
-      creditCard: "all",
-      prepaidCard: "all",
-      debitCard: "all",
-      mercadoPago: "all",
-    },
-  };
-  const onSubmit = async ({ selectedPaymentMethod, formData }: any) => {
-    // callback llamado al hacer clic en el botón enviar datos
-    return new Promise((resolve: any, reject: any) => {
-      fetch("/process_payment", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          // recibir el resultado del pago
-          resolve();
-        })
-        .catch((error) => {
-          // manejar la respuesta de error al intentar crear el pago
-          reject();
-        });
-    });
-  };
-  const onError = async (error: any) => {
-    // callback llamado para todos los casos de error de Brick
-    console.log(error);
-  };
-  const onReady = async () => {
-    /*
-   Callback llamado cuando el Brick está listo.
-   Aquí puede ocultar cargamentos de su sitio, por ejemplo.
- */
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data: {}) => {
+    console.log(data);
   };
 
   return (
-    <Payment
-      initialization={initialization}
-      customization={customization as any}
-      onSubmit={onSubmit}
-      onReady={onReady}
-      onError={onError}
-    />
+    <form onSubmit={handleSubmit(onSubmit)} action="">
+      <input
+        className="w-full p-2 border rounded-sm"
+        {...register("card_number", {
+          required: true,
+        })}
+        type="text"
+        placeholder="0000 0000 0000 0000"
+      />
+      {errors.card_number && errors.card_number.type == "required" && (
+        <p className="text-red-700 font-light">Este campo es obligatorio</p>
+      )}
+      <input
+        className="w-full p-2 border rounded-sm"
+        {...register("fullname", {
+          required: true,
+        })}
+        type="text"
+        placeholder="Nombre y apellido"
+      />
+      {errors.fullname && errors.fullname.type == "required" && (
+        <p className="text-red-700 font-light">Este campo es obligatorio</p>
+      )}
+      <input
+        className="w-full p-2 border rounded-sm"
+        {...register("expiration", {
+          required: true,
+        })}
+        type="text"
+        placeholder="Vencimiento"
+      />
+      {errors.expiration && errors.expiration.type == "required" && (
+        <p className="text-red-700 font-light">Este campo es obligatorio</p>
+      )}
+      <input
+        className="w-full p-2 border rounded-sm"
+        {...register("security_code", {
+          required: true,
+        })}
+        type="text"
+        placeholder="Código de seguridad"
+      />
+      {errors.security_code && errors.security_code.type == "required" && (
+        <p className="text-red-700 font-light">Este campo es obligatorio</p>
+      )}
+      <input
+        className="w-full p-2 border rounded-sm"
+        {...register("province", {
+          required: true,
+        })}
+        type="text"
+        placeholder="Provincia"
+      />
+      {errors.province && errors.province.type == "required" && (
+        <p className="text-red-700 font-light">Este campo es obligatorio</p>
+      )}
+      <input
+        className="w-full p-2 border rounded-sm"
+        {...register("city", {
+          required: true,
+        })}
+        type="text"
+        placeholder="Localidad"
+      />
+      {errors.city && errors.city.type == "required" && (
+        <p className="text-red-700 font-light">Este campo es obligatorio</p>
+      )}
+      <input
+        className="w-full p-2 border rounded-sm"
+        {...register("address", {
+          required: true,
+        })}
+        type="text"
+        placeholder="Domicilio/Calle"
+      />
+      {errors.address && errors.address.type == "required" && (
+        <p className="text-red-700 font-light">Este campo es obligatorio</p>
+      )}
+      <button className="w-full cursor-pointer p-2 border rounded-sm">
+        Confirmar pago
+      </button>
+    </form>
   );
 }
