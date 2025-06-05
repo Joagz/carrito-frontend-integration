@@ -1,8 +1,7 @@
 ---
 export const prerender = false;
 import Layout from "../../layouts/Layout.astro";
-import CantidadSelector from "../../components/product/CantidadSelector.tsx";
-import { AddToCartWrapper } from "../../components/product/AddToCartWrapper";
+import { AddToCartWrapper } from "../../components/cart/AddToCartWrapper.tsx";
 import { getCollection } from "astro:content";
 
 const { id } = Astro.params;

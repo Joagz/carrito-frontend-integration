@@ -42,7 +42,7 @@ export default function CartProductSelector() {
 
     function removeOne(id: number) {
         const index = products.findIndex(p => p.id == id);
-        if (index >= 0) {
+        if (index > 0) {
             const productsCopy = [...products];
             --productsCopy[index].stock;
             updateLocalStorage(productsCopy);
