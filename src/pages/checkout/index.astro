@@ -1,17 +1,18 @@
 ---
-import { CheckoutForm } from "../../components/checkout/CheckoutForm"
-import { CheckoutProducts } from "../../components/checkout/CheckoutProducts"
-import Layout from "../../layouts/Layout.astro"
+import { CheckoutForm } from "../../components/checkout/CheckoutForm";
+import { CheckoutProducts } from "../../components/checkout/CheckoutProducts";
+import Layout from "../../layouts/Layout.astro";
 ---
 
 <Layout>
-    <article class="w-full flex">
-        <section class="flex-1">
-            <CheckoutForm />
-        </section>
-        <section class="flex-1">
-            <CheckoutProducts />
-        </section>
-    </article>
-
+  <article class="w-full flex justify-center items-center">
+    <div class="w-full sm:w-3/4 flex">
+      <section class="flex-1 flex justify-center items-center">
+        <CheckoutForm client:load/>
+      </section>
+      <section class="flex-1 flex justify-center">
+        <CheckoutProducts client:load />
+      </section>
+    </div>
+  </article>
 </Layout>
