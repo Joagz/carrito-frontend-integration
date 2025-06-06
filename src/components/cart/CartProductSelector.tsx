@@ -1,24 +1,11 @@
-import { useEffect, useState } from "react";
 import CartProduct from "./CartProduct";
 import type { Product } from "../../interface/Product";
+import ProductList from "../product/ProductList";
+import { ShowPrices } from "../product/ShowPrices";
+import { useProducts } from "../../hooks/useProduct";
 
 export default function CartProductSelector() {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("products");
-    console.log(saved);
-    if (saved !== null) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) {
-          setProducts(parsed as Product[]);
-        }
-      } catch (e) {
-        console.error("Failed to parse products from localStorage", e);
-      }
-    }
-  }, []);
+  const [products, setProducts] = useProducts();
 
   function updateLocalStorage(updatedProducts: Product[]) {
     setProducts(updatedProducts);
@@ -70,25 +57,9 @@ export default function CartProductSelector() {
         ))}
       </section>
       <section className="flex flex-col flex-1 gap-5 border rounded-sm p-2">
-        <div className="flex w-full justify-between">
-          <span className="font-bold text-xl">Subtotal:</span>
-          <span>
-            {" "}
-            ${products.reduce((acc, cur) => acc + cur.price * cur.stock, 0)}
-          </span>
-        </div>
+        <ShowPrices />
         <ul>
-          {products.map((product) => (
-            <li key={product.id} className="flex justify-between gap-5">
-              <div className="flex justify-between items-center">
-                <p className="line-clamp-1 overflow-ellipsis font-light">
-                  {product.name}
-                </p>
-                <span className="text-sm">(x{product.stock})</span>
-              </div>
-              <p>${(product.price * product.stock).toLocaleString("es-ES")}</p>
-            </li>
-          ))}
+          <ProductList />
         </ul>
         <a
           className="w-full p-2 border hover:bg-stone-50 rounded-sm text-center"

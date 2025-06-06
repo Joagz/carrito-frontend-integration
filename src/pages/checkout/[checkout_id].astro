@@ -1,0 +1,26 @@
+---
+export const prerender = false;
+import ProductList from "../../components/product/ProductList";
+import { ShowPrices } from "../../components/product/ShowPrices";
+import Layout from "../../layouts/Layout.astro";
+
+if(Astro.request.method == "POST") {
+    console.log(Astro.url)
+    return Astro.redirect("/checkout/success")
+}
+
+---
+
+<Layout>
+  <article class="w-full p-5 sm:p-0 flex flex-col justify-center items-center">
+    <form method="post" 
+      class="w-full sm:w-2/3 p-4 bg-stone-50 flex justify-center items-center flex-col gap-3"
+    >
+      <div class="w-full">
+        <ProductList client:load />
+        <ShowPrices client:load />
+      </div>
+      <button class="p-2 border rounded-sm text-center hover:bg-slate-100 cursor-pointer" type="submit">Confirmar pago</button>
+    </form>
+  </article>
+</Layout>

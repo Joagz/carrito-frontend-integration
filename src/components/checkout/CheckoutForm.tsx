@@ -6,9 +6,11 @@ export function CheckoutForm() {
     register,
     formState: { errors },
   } = useForm();
-
   const onSubmit = (data: {}) => {
     console.log(data);
+
+    // TODO: PUT ID HERE
+    window.location.href = "/checkout/1";
   };
 
   return (
@@ -39,28 +41,33 @@ export function CheckoutForm() {
         <p className="text-red-700 font-light">Este campo es obligatorio</p>
       )}
       <div className="flex gap-3">
-        <input
-          className="w-full p-2 border rounded-sm"
-          {...register("expiration", {
-            required: true,
-          })}
-          type="text"
-          placeholder="Vencimiento"
-        />
-        {errors.expiration && errors.expiration.type == "required" && (
-          <p className="text-red-700 font-light">Este campo es obligatorio</p>
-        )}
-        <input
-          className="w-full p-2 border rounded-sm"
-          {...register("security_code", {
-            required: true,
-          })}
-          type="text"
-          placeholder="Código de seguridad"
-        />
-        {errors.security_code && errors.security_code.type == "required" && (
-          <p className="text-red-700 font-light">Este campo es obligatorio</p>
-        )}
+        {" "}
+        <div className="flex flex-col">
+          <input
+            className="w-full p-2 border rounded-sm"
+            {...register("expiration", {
+              required: true,
+            })}
+            type="text"
+            placeholder="Vencimiento"
+          />
+          {errors.expiration && errors.expiration.type == "required" && (
+            <p className="text-red-700 font-light">Este campo es obligatorio</p>
+          )}
+        </div>{" "}
+        <div className="flex flex-col">
+          <input
+            className="w-full p-2 border rounded-sm"
+            {...register("security_code", {
+              required: true,
+            })}
+            type="text"
+            placeholder="Código de seguridad"
+          />
+          {errors.security_code && errors.security_code.type == "required" && (
+            <p className="text-red-700 font-light">Este campo es obligatorio</p>
+          )}
+        </div>
       </div>
       <input
         className="w-full p-2 border rounded-sm"
