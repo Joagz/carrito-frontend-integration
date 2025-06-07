@@ -1,8 +1,9 @@
-import { useProducts } from "../../hooks/useProduct";
+import type { Product } from "../../interface/Product";
+interface Props {
+  products: Product[]
+}
 
-export default function () {
-  const [products, _] = useProducts();
-
+export default function ({ products }: Props) {
   return (
     <>
       {products.map((product) => (

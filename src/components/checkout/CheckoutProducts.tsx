@@ -21,7 +21,7 @@ export function CheckoutProducts() {
             </span>
           </div>
           <ul>
-            <ProductList />
+            <ProductList products={products} />
           </ul>
         </section>
       </article>

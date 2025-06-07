@@ -1,8 +1,10 @@
-import { useProducts } from "../../hooks/useProduct";
+import type { Product } from "../../interface/Product";
 
-export function ShowPrices() {
-  const [products, _] = useProducts();
+interface Props {
+  products: Product[]
+}
 
+export function ShowPrices({products}: Props) {
   return (
     <div className="flex w-full justify-between">
       <span className="font-bold text-xl">Subtotal:</span>

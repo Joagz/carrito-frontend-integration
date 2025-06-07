@@ -1,5 +1,6 @@
 ---
 export const prerender = false;
+import { CheckoutProductWrapper } from "../../components/checkout/CheckoutProductWrapper";
 import ProductList from "../../components/product/ProductList";
 import { ShowPrices } from "../../components/product/ShowPrices";
 import Layout from "../../layouts/Layout.astro";
@@ -17,8 +18,7 @@ if(Astro.request.method == "POST") {
       class="w-full sm:w-2/3 p-4 bg-stone-50 flex justify-center items-center flex-col gap-3"
     >
       <div class="w-full">
-        <ProductList client:load />
-        <ShowPrices client:load />
+        <CheckoutProductWrapper client:load/>
       </div>
       <button class="p-2 border rounded-sm text-center hover:bg-slate-100 cursor-pointer" type="submit">Confirmar pago</button>
     </form>
